@@ -33,33 +33,35 @@ clash_config_tools/
 
 ---
 
-## 📥 节点文件使用说明
+# 📥 使用说明
 
+## 1. 准备节点文件
 将你的节点 YAML 文件分别放入以下两个目录：
 - main_servers/: 主用节点列表
 - fallback_servers/: 备用节点列表（将自动组成 fallback 策略组）
 
-## ⚠️ 注意事项
+### ⚠️ 注意事项
 - 请将文件命名为可读性强的名称（如 HK.yaml, JP高速.yaml）；
 - 如希望控制节点排序，建议使用数字倒序作为前缀，例如：
- - - 9_hk.yaml（优先）
- - - 8_us.yaml
- - - 1_bak.yaml（最低）
+    - 9_hk.yaml（优先）
+    - 8_us.yaml
+    - 1_bak.yaml（最低）
 
 系统将自动读取所有 YAML 文件并合并节点。
 
-## 🧠 规则与分组说明
+## 2. 规则与分组说明 (默认不需要做任何操作)
  - 所有规则组文件位于 rules/，可根据实际需求自定义修改；
  - 每个规则文件包含以下字段：
- - - group_name: 生成的策略组名称
- - - key_word: 关键词匹配（节点名中包含任一关键词即被加入该组）
- - - rules: Clash 路由规则列表
- - - type: 策略组类型（支持 select, url-test）
+    - group_name: 生成的策略组名称
+    - key_word: 关键词匹配（节点名中包含任一关键词即被加入该组）
+    - rules: Clash 路由规则列表
+    - type: 策略组类型（支持 select, url-test）
 
-## 🚀 运行方法
+## 3. 🚀 运行Python
 ```python main.py```
 
-程序执行后将生成配置文件至 output/ 目录，文件名格式为：
+## 4. 输出结果
+运行后，程序将自动生成配置文件到 output/ 目录，文件名格式为
 ```output_YYYYMMDD_HHMMSS.yaml```
 
 ⸻
