@@ -712,3 +712,5 @@ rules:
   - DOMAIN-SUFFIX,zhongsou.com
   - DOMAIN-SUFFIX,zhuihd.com
   - GEOIP,CN
+  - DOMAIN-SUFFIX,cn
+  - DOMAIN-KEYWORD,-cn

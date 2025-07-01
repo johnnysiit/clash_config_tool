@@ -15,6 +15,18 @@ URL_TEST_CONFIG = {
     'max-failed-times': 1
 }
 
+DNS = {
+    'enable': True,
+    'ipv6': False,
+    'default-nameserver': ['223.5.5.5', '119.29.29.29'],
+    'enhanced-mode': 'fake-ip',
+    'fake-ip-range': '198.18.0.1/16',
+    'use-hosts': True,
+    'nameserver': ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query'],
+    'fallback': ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853'],
+    'fallback-filter': { 'geoip': True, 'ipcidr': ['240.0.0.0/4', '0.0.0.0/32'] }
+}
+
 class FlowStyleList(list):
     pass
 
@@ -176,6 +188,7 @@ class ConfigProcessor:
             'proxies': proxies,
             'proxy-groups': self.proxy_groups,
             'rules': self.rules,
+            'dns': DNS
         }
 
         # 输出为 flow-style
