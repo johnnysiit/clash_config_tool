@@ -64,16 +64,14 @@ clash_config_tools/
 运行后，程序将自动生成配置文件到 output/ 目录，文件名格式为
 ```output_YYYYMMDD_HHMMSS.yaml```
 
-⸻
-
-📌 示例输出结构
+### 📌 示例输出结构
 
 生成的配置文件包含以下字段：
  - proxies: 所有加载的节点（主 + 备）
  - proxy-groups: 规则分组，含主策略组、备用组、规则定义组等
  - rules: Clash 路由规则（支持 DOMAIN-SUFFIX, GEOIP, MATCH 等）
 
-⸻
+---
 
 ✅ 使用建议
  - 主策略组自动命名为 🚀 节点选择；
