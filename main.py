@@ -170,11 +170,12 @@ class ConfigProcessor:
     def create_yaml(self):
         # Create the YAML structure
         proxies = [dict(proxy) for proxy in self.main_servers + self.fallback_servers]
-    
+        self.rules.append(f'MATCH,{MAIN_RULES}')
+
         config = {
             'proxies': proxies,
             'proxy-groups': self.proxy_groups,
-            'rules': self.rules
+            'rules': self.rules,
         }
 
         # 输出为 flow-style
