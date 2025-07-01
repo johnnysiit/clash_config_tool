@@ -1,0 +1,20 @@
+group_name: '🇸🇬 东亚'
+type: 'url-test'
+key_word:
+  - SG
+  - JP
+  - KR
+  - TW
+  - 新加坡
+  - 日本
+  - 韩国
+  - 台湾
+rules:
+  - DOMAIN-SUFFIX,binance.com
+  - DOMAIN-SUFFIX,gate.com
+  - DOMAIN-SUFFIX,bitget.com
+  - DOMAIN-SUFFIX,okx.com
+  - DOMAIN,gemini.google.com
+  - DOMAIN-SUFFIX,claude.ai
+  - DOMAIN-SUFFIX,chatgpt.com
+  - DOMAIN-SUFFIX,openai.com

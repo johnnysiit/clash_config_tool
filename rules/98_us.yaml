@@ -1,0 +1,17 @@
+group_name: '🇺🇸 USA Only'
+type: 'url-test'
+key_word:
+  - USA
+  - 美国
+  - US
+rules:
+  - DOMAIN-SUFFIX,citi.com
+  - DOMAIN-SUFFIX,hulu.com
+  - DOMAIN-SUFFIX,peacocktv.com
+  - DOMAIN-SUFFIX,zelle.com
+  - DOMAIN-SUFFIX,bankofamerica.com
+  - DOMAIN-SUFFIX,ultramobile.com
+  - DOMAIN-SUFFIX,t-mobile.com
+  - DOMAIN-SUFFIX,petco.com
+  - DOMAIN-SUFFIX,perplexity.ai
+  - GEOIP,US

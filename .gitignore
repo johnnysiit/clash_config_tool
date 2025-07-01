@@ -1,0 +1,3 @@
+/main_servers/*.yaml
+/fallback_servers/*.yaml
+/output/*.yaml

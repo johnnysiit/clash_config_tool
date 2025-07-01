@@ -1,0 +1,7 @@
+group_name: '🇭🇰 香港'
+type: 'url-test'
+key_word:
+  - HK
+  - 香港
+rules:
+  - GEOIP,HK

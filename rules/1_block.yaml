@@ -1,0 +1,10 @@
+group_name: '🛑 全球拦截'
+type: 'select'
+key_word:
+  - REJECT
+  - DIRECT
+rules:
+  - DOMAIN-SUFFIX,cb.baidu.com
+  - DOMAIN-SUFFIX,eclick.baidu.com
+  - DOMAIN-SUFFIX,cm.masky.biddingx.com
+  - DOMAIN-SUFFIX,ads.vamaker.com
