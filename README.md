@@ -42,9 +42,9 @@ clash_config_tools/
 ## ⚠️ 注意事项
 - 请将文件命名为可读性强的名称（如 HK.yaml, JP高速.yaml）；
 - 如希望控制节点排序，建议使用数字倒序作为前缀，例如：
- - 9_hk.yaml（优先）
- - 8_us.yaml
- - 1_bak.yaml（最低）
+ - - 9_hk.yaml（优先）
+ - - 8_us.yaml
+ - - 1_bak.yaml（最低）
 
 系统将自动读取所有 YAML 文件并合并节点。
 
@@ -76,5 +76,5 @@ clash_config_tools/
 ✅ 使用建议
  - 主策略组自动命名为 🚀 节点选择；
  - 备用节点策略组命名为 🛟备用节点；
- - 默认测速 URL 为 http://www.qq.com/，测速间隔为 2 小时；
+ - 默认测速 URL 为 http://www.qq.com   测速间隔为 2 小时；
  - 可根据需求调整 URL_TEST_CONFIG。
