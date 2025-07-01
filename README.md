@@ -51,10 +51,10 @@ clash_config_tools/
 ## 🧠 规则与分组说明
  - 所有规则组文件位于 rules/，可根据实际需求自定义修改；
  - 每个规则文件包含以下字段：
- - group_name: 生成的策略组名称
- - key_word: 关键词匹配（节点名中包含任一关键词即被加入该组）
- - rules: Clash 路由规则列表
- - type: 策略组类型（支持 select, url-test）
+ - - group_name: 生成的策略组名称
+ - - key_word: 关键词匹配（节点名中包含任一关键词即被加入该组）
+ - - rules: Clash 路由规则列表
+ - - type: 策略组类型（支持 select, url-test）
 
 ## 🚀 运行方法
 ```python main.py```
