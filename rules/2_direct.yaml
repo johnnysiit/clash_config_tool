@@ -9,15 +9,6 @@ rules:
   - DOMAIN-SUFFIX,lan
   - DOMAIN-SUFFIX,local
   - DOMAIN-SUFFIX,localhost
-  - IP-CIDR,0.0.0.0/8,no-resolve
-  - IP-CIDR,10.0.0.0/8,no-resolve
-  - IP-CIDR,100.64.0.0/10,no-resolve
-  - IP-CIDR,198.18.0.0/16,no-resolve
-  - IP-CIDR,224.0.0.0/4,no-resolve
-  - IP-CIDR6,::1/128,no-resolve
-  - IP-CIDR6,fc00::/7,no-resolve
-  - IP-CIDR6,fe80::/10,no-resolve
-  - IP-CIDR6,fd00::/8,no-resolve
   - DOMAIN,instant.arubanetworks.com
   - DOMAIN,setmeup.arubanetworks.com
   - DOMAIN,router.asus.com
@@ -711,3 +702,37 @@ rules:
   - GEOIP,CN
   - DOMAIN-SUFFIX,cn
   - DOMAIN-KEYWORD,-cn
+  # 回环地址（本机）
+  - IP-CIDR,127.0.0.0/8,no-resolve
+
+  # 局域网（LAN）保留地址
+  - IP-CIDR,10.0.0.0/8,no-resolve
+  - IP-CIDR,172.16.0.0/12,no-resolve
+  - IP-CIDR,192.168.0.0/16,no-resolve
+
+  # 链路本地地址（DHCP失败或自动配置）
+  - IP-CIDR,169.254.0.0/16,no-resolve
+
+  # 网络测试地址段（RFC 2544）
+  - IP-CIDR,198.18.0.0/15,no-resolve
+
+  # CGNAT（大型运营商共享 NAT）
+  - IP-CIDR,100.64.0.0/10,no-resolve
+
+  # 多播地址
+  - IP-CIDR,224.0.0.0/4,no-resolve
+
+  # 广播地址（IPv4末尾255）
+  - IP-CIDR,255.255.255.255/32,no-resolve
+
+  # 保留未分配地址（非公网）
+  - IP-CIDR,0.0.0.0/8,no-resolve
+  - IP-CIDR,240.0.0.0/4,no-resolve
+
+  # IPv6 回环与链路本地
+  - IP-CIDR6,::1/128,no-resolve
+  - IP-CIDR6,fc00::/7,no-resolve
+  - IP-CIDR6,fe80::/10,no-resolve
+
+  # IPv6 多播和保留
+  - IP-CIDR6,ff00::/8,no-resolve

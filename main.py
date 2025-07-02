@@ -93,7 +93,7 @@ class ConfigProcessor:
             if not rule.endswith('no-resolve'):
                 new_rule = rule+','+group_name
             else:
-                new_rule = rule
+                new_rule = rule.replace('no-resolve', f'{group_name},no-resolve')
             if new_rule not in self.rules:
                 self.rules.append(new_rule)
 
