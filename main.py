@@ -140,6 +140,12 @@ class ConfigProcessor:
         key_word = group['key_word']
         server_include = [group_name+' LB']
 
+        # Add fallback group if it exists
+        if group['fallback_group'] != []:
+            for fallback_group in group['fallback_group']:
+                if fallback_group in self.proxy_groups_name or fallback_group.replace(' LB', '') in self.proxy_groups_name:
+                    server_include.append(fallback_group)
+
         # Check for keyword in server names
         for server in self.fallback_servers:
             server_name = server.get('name', '')
@@ -175,17 +181,17 @@ class ConfigProcessor:
                 if tag in key_word:
                     server_include.append(tag)
 
-            # Add fallback group if it exists
-            if group['fallback_group'] != []:
-                for fallback_group in group['fallback_group']:
-                    if fallback_group in self.proxy_groups_name:
-                        server_include.append(fallback_group)
-
             # Check for keyword in server names
             for server in self.main_servers:
                 server_name = server.get('name', '')
                 if any(c in server_name for c in key_word):
                     server_include.append(server_name)
+
+            # Add fallback group if it exists
+            if group['fallback_group'] != [] and not fallback_enabled:
+                for fallback_group in group['fallback_group']:
+                    if fallback_group in self.proxy_groups_name:
+                        server_include.append(fallback_group)
 
             # Create proxy group
             if rule_type == 'url-test':
@@ -202,6 +208,13 @@ class ConfigProcessor:
                     'strategy': self.lb_strategy,
                     **self.health_check,
                     'hidden': True,
+                    'proxies': server_include
+                })
+            elif rule_type == 'fallback':
+                self.proxy_groups.append({
+                    'name': group_name,
+                    'type': 'fallback',
+                    **self.health_check,
                     'proxies': server_include
                 })
             else:
@@ -253,3 +266,5 @@ if __name__ == "__main__":
     processor.run()
     processor2 = ConfigProcessor(interval=2000, lb_strategy='consistent-hashing')
     processor2.run()
+    processor3 = ConfigProcessor(interval=180, lb_strategy='consistent-hashing')
+    processor3.run()

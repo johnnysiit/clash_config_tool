@@ -4,5 +4,7 @@ fallback_enabled: true
 key_word:
   - HK
   - 香港
+fallback_group:
+  - '🇸🇬 东亚 LB'
 rules:
   - GEOIP,HK
