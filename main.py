@@ -27,7 +27,7 @@ def represent_flow_style_list(dumper, data):
 yaml.add_representer(FlowStyleList, represent_flow_style_list)
 
 class ConfigProcessor:
-    def __init__(self, interval=300):
+    def __init__(self, interval=300, lb_strategy='sticky-sessions'):
         self.rules = []
         self.proxy_groups_name = []
         self.config_group_details = []
@@ -36,6 +36,7 @@ class ConfigProcessor:
         self.main_servers = []
         self.fallback_servers = []
         self.interval = interval
+        self.lb_strategy = lb_strategy
         self.health_check = {
             'url': 'http://www.qq.com/',
             'interval': interval,
@@ -198,7 +199,7 @@ class ConfigProcessor:
                 self.proxy_groups.append({
                     'name': group_name,
                     'type': 'load-balance',
-                    'strategy': 'consistent-hashing',
+                    'strategy': self.lb_strategy,
                     **self.health_check,
                     'hidden': True,
                     'proxies': server_include
@@ -233,7 +234,7 @@ class ConfigProcessor:
         yaml_str = yaml.dump(config, allow_unicode=True, sort_keys=False)
 
         from datetime import datetime
-        file_name = f"output_Int{str(self.interval)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
+        file_name = f"output_Int{str(self.interval)}_{self.lb_strategy}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
         path = os.path.join(os.getcwd(), 'output', file_name)
         if not os.path.exists('./output'):
             os.makedirs('./output')
@@ -248,7 +249,7 @@ class ConfigProcessor:
         self.create_yaml()
 
 if __name__ == "__main__":
-    processor = ConfigProcessor(interval=300)
+    processor = ConfigProcessor(interval=300, lb_strategy='sticky-sessions')
     processor.run()
-    processor2 = ConfigProcessor(interval=2000)
+    processor2 = ConfigProcessor(interval=2000, lb_strategy='consistent-hashing')
     processor2.run()
