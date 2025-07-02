@@ -188,8 +188,9 @@ class ConfigProcessor:
                 self.proxy_groups.append({
                     'name': group_name,
                     'type': 'load-balance',
-                    'strategy': 'consistent-hashing',
+                    'strategy': 'sticky-sessions',
                     **self.health_check,
+                    'hidden': True,
                     'proxies': server_include
                 })
             else:
@@ -214,7 +215,8 @@ class ConfigProcessor:
             'proxies': proxies,
             'proxy-groups': proxy_groups,
             'rules': self.rules,
-            'dns': DNS
+            'dns': DNS,
+            'ipv6': False
         }
 
         # 输出为 flow-style
