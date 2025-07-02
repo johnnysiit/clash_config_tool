@@ -131,9 +131,9 @@ class ConfigProcessor:
         })
 
     def _create_fallback_group(self, group):
-        group_name = group['name'] + ' Fallback'
+        group_name = group['name']
         key_word = group['key_word']
-        server_include = []
+        server_include = [group_name+' LB']
 
         # Check for keyword in server names
         for server in self.fallback_servers:
@@ -161,7 +161,7 @@ class ConfigProcessor:
 
             if fallback_enabled:
                 self._create_fallback_group(group)
-                server_include.append(group_name + ' Fallback')
+                group_name = group_name + ' LB'
             # Check for special tags
             for tag in SPECIAL_TAG:
                 if tag in key_word:
@@ -209,10 +209,10 @@ class ConfigProcessor:
         # Create the YAML structure
         proxies = [dict(proxy) for proxy in self.main_servers + self.fallback_servers]
         self.rules.append(f'MATCH,{MAIN_RULES}')
-        proxy_groups = self.proxy_groups.extend(self.fallback_groups)
+        proxy_groups = self.proxy_groups + self.fallback_groups
         config = {
             'proxies': proxies,
-            'proxy-groups': self.proxy_groups,
+            'proxy-groups': proxy_groups,
             'rules': self.rules,
             'dns': DNS
         }
