@@ -1,5 +1,6 @@
 group_name: '🇭🇰 香港'
-type: 'url-test'
+type: 'load-balance'
+fallback_enabled: true
 key_word:
   - HK
   - 香港

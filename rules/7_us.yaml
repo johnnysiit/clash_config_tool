@@ -1,5 +1,6 @@
-group_name: '🇺🇸 USA Only'
-type: 'url-test'
+group_name: '🇺🇸 USA'
+type: 'load-balance'
+fallback_enabled: true
 key_word:
   - USA
   - 美国

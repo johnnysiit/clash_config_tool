@@ -6,15 +6,6 @@ MAIN_RULES = '🚀 节点选择'
 
 SPECIAL_TAG = ['REJECT', 'DIRECT', 'MAIN']
 
-URL_TEST_CONFIG = {
-    'type': 'url-test',
-    'url': 'http://www.qq.com/',
-    'interval': 7200,
-    'tolerance': 1,
-    'timeout': 1000,
-    'max-failed-times': 1
-}
-
 DNS = {
     'enable': True,
     'ipv6': False,
@@ -36,13 +27,20 @@ def represent_flow_style_list(dumper, data):
 yaml.add_representer(FlowStyleList, represent_flow_style_list)
 
 class ConfigProcessor:
-    def __init__(self):
+    def __init__(self, interval=300):
         self.rules = []
         self.proxy_groups_name = []
         self.config_group_details = []
         self.proxy_groups = []
+        self.fallback_groups = []
         self.main_servers = []
         self.fallback_servers = []
+        self.interval = interval
+        self.health_check = {
+            'url': 'http://www.qq.com/',
+            'interval': interval,
+            'timeout': 1000
+        }
         pass
 
     def _list_folder_files(self, folder_path):
@@ -107,13 +105,15 @@ class ConfigProcessor:
             key_word = data['key_word']
             rules = data['rules']
             rule_type = data.get('type', 'select')
+            fallback_enabled = data.get('fallback_enabled', False)
             self._rules_process(group_name, rules)
             self.proxy_groups_name.append(group_name)
 
             self.config_group_details.append({
                 'name': group_name,
                 'key_word': key_word,
-                'type': rule_type
+                'type': rule_type,
+                'fallback_enabled': fallback_enabled
             })
 
     def _create_main_group(self):
@@ -127,25 +127,41 @@ class ConfigProcessor:
         self.proxy_groups.append({
             'name': MAIN_RULES,
             'type': 'select',
-            'proxies': proxies
+            'proxies': proxies,
         })
 
-    def _create_fallback_group(self):
-        fallback_servers = [server.get('name', '') for server in self.fallback_servers]
-        if fallback_servers:
-            self.proxy_groups.append({
-                'name': '🛟备用节点',
-                'type': 'fallback',
-                'proxies': fallback_servers
-            })
+    def _create_fallback_group(self, group):
+        group_name = group['name'] + ' Fallback'
+        key_word = group['key_word']
+        server_include = []
+
+        # Check for keyword in server names
+        for server in self.fallback_servers:
+            server_name = server.get('name', '')
+            if any(c in server_name for c in key_word):
+                server_include.append(server_name)
+
+        # Create Group
+        self.fallback_groups.append({
+            'name': group_name,
+            'type': 'fallback',
+            **self.health_check,
+            'proxies': server_include
+        })
+
+
     def create_groups(self):
         self._create_main_group()
         for group in self.config_group_details:
             group_name = group['name']
             key_word = group['key_word']
             rule_type = group['type']
+            fallback_enabled = group['fallback_enabled']
             server_include = []
 
+            if fallback_enabled:
+                self._create_fallback_group(group)
+                server_include.append(group_name + ' Fallback')
             # Check for special tags
             for tag in SPECIAL_TAG:
                 if tag in key_word:
@@ -164,7 +180,16 @@ class ConfigProcessor:
             if rule_type == 'url-test':
                 self.proxy_groups.append({
                     'name': group_name,
-                    **URL_TEST_CONFIG,
+                    'type': 'url-test',
+                    **self.health_check,
+                    'proxies': server_include
+                })
+            elif rule_type == 'load-balance':
+                self.proxy_groups.append({
+                    'name': group_name,
+                    'type': 'load-balance',
+                    'strategy': 'round-robin',
+                    **self.health_check,
                     'proxies': server_include
                 })
             else:
@@ -173,7 +198,6 @@ class ConfigProcessor:
                     'type': 'select',
                     'proxies': server_include
                 })
-        self._create_fallback_group()
 
     def load_main_servers(self):
         self.main_servers = self._load_servers('main_servers')
@@ -185,7 +209,7 @@ class ConfigProcessor:
         # Create the YAML structure
         proxies = [dict(proxy) for proxy in self.main_servers + self.fallback_servers]
         self.rules.append(f'MATCH,{MAIN_RULES}')
-
+        proxy_groups = self.proxy_groups.extend(self.fallback_groups)
         config = {
             'proxies': proxies,
             'proxy-groups': self.proxy_groups,
@@ -197,7 +221,7 @@ class ConfigProcessor:
         yaml_str = yaml.dump(config, allow_unicode=True, sort_keys=False)
 
         from datetime import datetime
-        file_name = f"output_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
+        file_name = f"output_Int{str(self.interval)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
         path = os.path.join(os.getcwd(), 'output', file_name)
         if not os.path.exists('./output'):
             os.makedirs('./output')
@@ -212,5 +236,7 @@ class ConfigProcessor:
         self.create_yaml()
 
 if __name__ == "__main__":
-    processor = ConfigProcessor()
+    processor = ConfigProcessor(interval=300)
     processor.run()
+    processor2 = ConfigProcessor(interval=2000)
+    processor2.run()
