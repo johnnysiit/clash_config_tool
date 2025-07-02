@@ -1,7 +1,9 @@
 group_name: '🎯 全球直连'
-type: 'select'
+type: 'fallback'
 key_word:
   - DIRECT
+fallback_group:
+  - '🇭🇰 香港'
 rules:
   - DOMAIN-SUFFIX,acl4.ssr
   - DOMAIN-SUFFIX,ip6-localhost

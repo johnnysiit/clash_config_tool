@@ -2,9 +2,9 @@ from logging import config
 import os
 import yaml
 
-MAIN_RULES = '🚀 节点选择'
+MAIN_GROUP = '🚀 节点选择'
 
-SPECIAL_TAG = ['REJECT', 'DIRECT', 'MAIN']
+SPECIAL_TAG = ['REJECT', 'DIRECT']
 
 DNS = {
     'enable': True,
@@ -49,10 +49,11 @@ class ConfigProcessor:
         :param folder_path: Path to the folder.
         :return: List of file names in the folder.
         """
-        return [
+        files = [
             f for f in os.listdir(f'./{folder_path}')
             if os.path.isfile(os.path.join(f'./{folder_path}', f)) and f.endswith('.yaml')
         ]
+        return sorted(files)
 
     def _load_yaml(self, file_path):
         """
@@ -102,10 +103,11 @@ class ConfigProcessor:
         for rule_file in rule_list:
             data = self._load_yaml(os.path.join('./rules', rule_file))
             group_name = data['group_name']
-            key_word = data['key_word']
+            key_word = data.get('key_word', [])
             rules = data['rules']
             rule_type = data.get('type', 'select')
             fallback_enabled = data.get('fallback_enabled', False)
+            fallback_group = data.get('fallback_group', [])
             self._rules_process(group_name, rules)
             self.proxy_groups_name.append(group_name)
 
@@ -113,11 +115,13 @@ class ConfigProcessor:
                 'name': group_name,
                 'key_word': key_word,
                 'type': rule_type,
-                'fallback_enabled': fallback_enabled
+                'fallback_enabled': fallback_enabled,
+                'fallback_group': fallback_group
             })
 
     def _create_main_group(self):
         proxies = self.proxy_groups_name
+        proxies.remove(MAIN_GROUP)
         proxies.extend(['DIRECT', 'REJECT'])
         main_server_names = [server.get('name', '') for server in self.main_servers]
         proxies.extend(main_server_names)
@@ -125,7 +129,7 @@ class ConfigProcessor:
         proxies.extend(fallback_server_names)
 
         self.proxy_groups.append({
-            'name': MAIN_RULES,
+            'name': MAIN_GROUP,
             'type': 'select',
             'proxies': proxies,
         })
@@ -153,6 +157,8 @@ class ConfigProcessor:
     def create_groups(self):
         self._create_main_group()
         for group in self.config_group_details:
+            if group['name'] == MAIN_GROUP:
+                continue
             group_name = group['name']
             key_word = group['key_word']
             rule_type = group['type']
@@ -162,13 +168,17 @@ class ConfigProcessor:
             if fallback_enabled:
                 self._create_fallback_group(group)
                 group_name = group_name + ' LB'
+
             # Check for special tags
             for tag in SPECIAL_TAG:
                 if tag in key_word:
-                    if tag == 'MAIN':
-                        server_include.append(MAIN_RULES)
-                    else:
-                        server_include.append(tag)
+                    server_include.append(tag)
+
+            # Add fallback group if it exists
+            if group['fallback_group'] != []:
+                for fallback_group in group['fallback_group']:
+                    if fallback_group in self.proxy_groups_name:
+                        server_include.append(fallback_group)
 
             # Check for keyword in server names
             for server in self.main_servers:
@@ -188,7 +198,7 @@ class ConfigProcessor:
                 self.proxy_groups.append({
                     'name': group_name,
                     'type': 'load-balance',
-                    'strategy': 'sticky-sessions',
+                    'strategy': 'consistent-hashing',
                     **self.health_check,
                     'hidden': True,
                     'proxies': server_include
@@ -209,7 +219,7 @@ class ConfigProcessor:
     def create_yaml(self):
         # Create the YAML structure
         proxies = [dict(proxy) for proxy in self.main_servers + self.fallback_servers]
-        self.rules.append(f'MATCH,{MAIN_RULES}')
+        self.rules.append(f'MATCH,{MAIN_GROUP}')
         proxy_groups = self.proxy_groups + self.fallback_groups
         config = {
             'proxies': proxies,
