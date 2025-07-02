@@ -188,7 +188,7 @@ class ConfigProcessor:
                 self.proxy_groups.append({
                     'name': group_name,
                     'type': 'load-balance',
-                    'strategy': 'round-robin',
+                    'strategy': 'consistent-hashing',
                     **self.health_check,
                     'proxies': server_include
                 })
