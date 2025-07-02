@@ -14,4 +14,11 @@ rules:
   - DOMAIN-SUFFIX,t-mobile.com
   - DOMAIN-SUFFIX,petco.com
   - DOMAIN-SUFFIX,perplexity.ai
-  - GEOIP,US
+  - DOMAIN-SUFFIX,chase.com
+  - DOMAIN-SUFFIX,capitalone.com
+  - DOMAIN-SUFFIX,discover.com
+  - DOMAIN-SUFFIX,usaa.com
+  - DOMAIN-SUFFIX,usbank.com
+  - DOMAIN-SUFFIX,americanexpress.com
+  - DOMAIN-SUFFIX,ally.com
+  - DOMAIN-SUFFIX,discoverfinancial.com
