@@ -2,3 +2,4 @@
 /fallback_servers/*.yaml
 /output/*.yaml
 *.DS_Store
+.DS_Store
