@@ -3,9 +3,8 @@ type: 'fallback'
 key_word:
   - DIRECT
 fallback_group:
-  - 🇭🇰 香港'
+  - '🇭🇰 香港'
 rules:
-  - DOMAIN-SUFFIX,itunes.apple.com
   - DOMAIN-SUFFIX,icloud.com
   - DOMAIN-SUFFIX,icloud-content.com
   - DOMAIN-SUFFIX,aaplimg.com
