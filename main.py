@@ -8,14 +8,74 @@ SPECIAL_TAG = ['REJECT', 'DIRECT']
 
 DNS = {
     'enable': True,
-    'ipv6': False,
-    'default-nameserver': ['223.5.5.5', '119.29.29.29'],
     'enhanced-mode': 'fake-ip',
     'fake-ip-range': '198.18.0.1/16',
-    'use-hosts': True,
-    'nameserver': ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query'],
-    'fallback': ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853'],
-    'fallback-filter': { 'geoip': True, 'ipcidr': ['240.0.0.0/4', '0.0.0.0/32'] }
+    'nameserver-policy': {
+        '*.tw': '1.1.1.1',
+        'testflight.apple.com': '8.8.8.8',
+        '*.tmall.com': '223.5.5.5',
+        '*.taobao.com': '223.5.5.5',
+        '*.alicdn.com': '223.5.5.5',
+        '*.aliyun.com': '223.5.5.5',
+        '*.alipay*.com': '223.5.5.5',
+        '*.alibaba*.com': '223.5.5.5',
+        '*.alimama*.com': '223.5.5.5',
+        '*.qq.com': '114.114.114.114',
+        '*.tencent.com': '114.114.114.114',
+        '*.weixin.com': '114.114.114.114',
+        '*.qpic.cn': '114.114.114.114',
+        '*.jd.com': '114.114.114.114',
+        '*.bilibili.com': '114.114.114.114',
+        'hdslb.com': '114.114.114.114',
+        '*.163.com': '119.29.29.29',
+        '*.126.com': '119.29.29.29',
+        '*.126.net': '114.114.114.114',
+        '*.127.net': '114.114.114.114',
+        '*.netease.com': '114.114.114.114',
+        '*.10010.com': '114.114.114.114',
+        '*.unicompayment.com': '114.114.114.114',
+        '*.ximalaya.com': '114.114.114.114',
+        '*.baidu.com': '114.114.114.114',
+        '*.bdstatic.com': '114.114.114.114'
+    },
+    'nameserver': [
+        '119.29.29.29',
+        '223.5.5.5',
+        'https://dns.alidns.com/dns-query',
+        'https://doh.pub/dns-query',
+        '114.114.114.114',
+        '156.154.70.1',
+        '1.0.0.1',
+        '8.8.4.4'
+    ],
+    'fallback': [
+        '208.67.222.222:5353',
+        '208.67.220.220:5353',
+        '208.67.222.220:5353',
+        '208.67.220.222:5353',
+        'https://1.1.1.1/dns-query',
+        'https://1.1.1.2/dns-query',
+        'https://1.1.1.3/dns-query',
+        'https://1.0.0.1/dns-query',
+        'https://1.0.0.2/dns-query',
+        'https://1.0.0.3/dns-query',
+        'https://45.11.45.11/dns-query',
+        'https://146.112.41.2/dns-query',
+        'https://162.159.36.1/dns-query',
+        'https://162.159.46.1/dns-query',
+        'https://9.9.9.11:5053/dns-query',
+        'https://101.6.6.6:8443/dns-query',
+        'https://208.67.222.222/dns-query',
+        'https://208.67.220.220/dns-query',
+        'https://185.222.222.222/dns-query',
+        'https://101.101.101.101/dns-query',
+        'https://149.112.112.11:5053/dns-query'
+    ],
+    'fallback-filter': {
+        'geoip': True,
+        'geoip-code': 'CN',
+        'ipcidr': ['240.0.0.0/4']
+    }
 }
 
 class FlowStyleList(list):
