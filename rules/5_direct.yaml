@@ -24,10 +24,10 @@ rules:
   - DOMAIN-SUFFIX,lan
   - DOMAIN-SUFFIX,local
   - DOMAIN-SUFFIX,localhost
-  - DOMAIN,instant.arubanetworks.com
-  - DOMAIN,setmeup.arubanetworks.com
-  - DOMAIN,router.asus.com
-  - DOMAIN,www.asusrouter.com
+  - DOMAIN-SUFFIX,instant.arubanetworks.com
+  - DOMAIN-SUFFIX,setmeup.arubanetworks.com
+  - DOMAIN-SUFFIX,router.asus.com
+  - DOMAIN-SUFFIX,www.asusrouter.com
   - DOMAIN-SUFFIX,hiwifi.com
   - DOMAIN-SUFFIX,leike.cc
   - DOMAIN-SUFFIX,miwifi.com
@@ -44,17 +44,17 @@ rules:
   - DOMAIN-SUFFIX,ol.epicgames.com
   - DOMAIN-SUFFIX,dizhensubao.getui.com
   - DOMAIN-SUFFIX,tracking-protection.cdn.mozilla.net
-  - DOMAIN,origin-a.akamaihd.net
-  - DOMAIN,fairplay.l.qq.com
-  - DOMAIN,livew.l.qq.com
-  - DOMAIN,vd.l.qq.com
-  - DOMAIN,errlog.umeng.com
-  - DOMAIN,msg.umeng.com
-  - DOMAIN,msg.umengcloud.com
-  - DOMAIN,tracking.miui.com
-  - DOMAIN,app.adjust.com
-  - DOMAIN,bdtj.tagtic.cn
-  - DOMAIN,rewards.hypixel.net
+  - DOMAIN-SUFFIX,origin-a.akamaihd.net
+  - DOMAIN-SUFFIX,fairplay.l.qq.com
+  - DOMAIN-SUFFIX,livew.l.qq.com
+  - DOMAIN-SUFFIX,vd.l.qq.com
+  - DOMAIN-SUFFIX,errlog.umeng.com
+  - DOMAIN-SUFFIX,msg.umeng.com
+  - DOMAIN-SUFFIX,msg.umengcloud.com
+  - DOMAIN-SUFFIX,tracking.miui.com
+  - DOMAIN-SUFFIX,app.adjust.com
+  - DOMAIN-SUFFIX,bdtj.tagtic.cn
+  - DOMAIN-SUFFIX,rewards.hypixel.net
   - DOMAIN-SUFFIX,koodomobile.com
   - DOMAIN-SUFFIX,koodomobile.ca
   - DOMAIN-SUFFIX,265.com
@@ -66,18 +66,18 @@ rules:
   - DOMAIN-SUFFIX,ocsp.pki.goog
   - DOMAIN-SUFFIX,recaptcha.net
   - DOMAIN-SUFFIX,settings.crashlytics.com
-  - DOMAIN,csgo.wmsj.cn
-  - DOMAIN,dl.steam.clngaa.com
-  - DOMAIN,dl.steam.ksyna.com
-  - DOMAIN,dota2.wmsj.cn
-  - DOMAIN,st.dl.bscstorage.net
-  - DOMAIN,st.dl.eccdnx.com
-  - DOMAIN,st.dl.pinyuncloud.com
-  - DOMAIN,steampipe.steamcontent.tnkjmec.com
-  - DOMAIN,steampowered.com.8686c.com
-  - DOMAIN,steamstatic.com.8686c.com
-  - DOMAIN,wmsjsteam.com
-  - DOMAIN,xz.pphimalayanrt.com
+  - DOMAIN-SUFFIX,csgo.wmsj.cn
+  - DOMAIN-SUFFIX,dl.steam.clngaa.com
+  - DOMAIN-SUFFIX,dl.steam.ksyna.com
+  - DOMAIN-SUFFIX,dota2.wmsj.cn
+  - DOMAIN-SUFFIX,st.dl.bscstorage.net
+  - DOMAIN-SUFFIX,st.dl.eccdnx.com
+  - DOMAIN-SUFFIX,st.dl.pinyuncloud.com
+  - DOMAIN-SUFFIX,steampipe.steamcontent.tnkjmec.com
+  - DOMAIN-SUFFIX,steampowered.com.8686c.com
+  - DOMAIN-SUFFIX,steamstatic.com.8686c.com
+  - DOMAIN-SUFFIX,wmsjsteam.com
+  - DOMAIN-SUFFIX,xz.pphimalayanrt.com
   - DOMAIN-SUFFIX,cm.steampowered.com
   - DOMAIN-SUFFIX,steamchina.com
   - DOMAIN-SUFFIX,steamcontent.com
@@ -415,17 +415,17 @@ rules:
   - DOMAIN-SUFFIX,zmzapi.net
   - DOMAIN-SUFFIX,zmzfile.com
   - DOMAIN-SUFFIX,teamviewer.com
-  - DOMAIN,auth.wosms.cn
-  - DOMAIN,config.cmpassport.com
-  - DOMAIN,enrichgw.10010.com
-  - DOMAIN,hmrz.wo.cn
-  - DOMAIN,id.mail.wo.cn
-  - DOMAIN,log.cmpassport.com
-  - DOMAIN,log1.cmpassport.com
-  - DOMAIN,mdn.open.wo.cn
-  - DOMAIN,nishub1.10010.com
-  - DOMAIN,opencloud.wostore.cn
-  - DOMAIN,ye.dun.163yun.com
+  - DOMAIN-SUFFIX,auth.wosms.cn
+  - DOMAIN-SUFFIX,config.cmpassport.com
+  - DOMAIN-SUFFIX,enrichgw.10010.com
+  - DOMAIN-SUFFIX,hmrz.wo.cn
+  - DOMAIN-SUFFIX,id.mail.wo.cn
+  - DOMAIN-SUFFIX,log.cmpassport.com
+  - DOMAIN-SUFFIX,log1.cmpassport.com
+  - DOMAIN-SUFFIX,mdn.open.wo.cn
+  - DOMAIN-SUFFIX,nishub1.10010.com
+  - DOMAIN-SUFFIX,opencloud.wostore.cn
+  - DOMAIN-SUFFIX,ye.dun.163yun.com
   - DOMAIN-SUFFIX,auth.wo.cn
   - DOMAIN-SUFFIX,cmpassport.com
   - DOMAIN-SUFFIX,id6.me
