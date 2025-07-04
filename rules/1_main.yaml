@@ -1,3 +1,11 @@
 group_name: '🚀 节点选择'
 rules:
-  - DOMAIN-SUFFIX,apple.com
+  - DOMAIN,developer.apple.com
+  - DOMAIN,ocsp.apple.com
+  - DOMAIN-SUFFIX,apple-dns.net
+  - DOMAIN,testflight.apple.com
+  - DOMAIN,sandbox.itunes.apple.com
+  - DOMAIN,itunes.apple.com
+  - DOMAIN-SUFFIX,apps.apple.com
+  - DOMAIN-SUFFIX,blobstore.apple.com
+  - DOMAIN,cvws.icloud-content.com
