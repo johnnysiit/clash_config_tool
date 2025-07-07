@@ -7,52 +7,75 @@ MAIN_GROUP = '🚀 节点选择'
 SPECIAL_TAG = ['REJECT', 'DIRECT']
 
 DNS = {
-    "enable": True,  # 启用 DNS 功能
-    "ipv6": False,  # 禁用 IPv6，减少潜在的解析问题
-    "listen": "0.0.0.0:1053",  # 监听地址和端口
-    "prefer-h3": True,  # 优先使用 DoH3
-    "respect-rules": True,  # 遵循 Clash 路由规则
-    "enhanced-mode": "fake-ip",  # 使用增强模式
-    "cache-algorithm": "arc",  # 使用 ARC 缓存算法
-    "cache-size": 2048,  # 缓存大小
-    "use-hosts": False,  # 不使用自定义 hosts
-    "use-system-hosts": False,  # 不使用系统 hosts
-    "fake-ip-range": "198.18.0.1/16",  # fake-ip 范围
-    "fake-ip-filter-mode": "blacklist",
-    "fake-ip-filter": [
-        "geosite:connectivity-check",
-        "geosite:private",
-        "*"
-    ],
-    "default-nameserver": [
-        "223.5.5.5",  # 阿里
-        "119.29.29.29",  # 腾讯
-        "system"
-    ],
-    "proxy-server-nameserver": [
-        'https://doh.pub/dns-query', 
-        'https://dns.alidns.com/dns-query'
-    ],
-    "nameserver": [
-        "https://1.1.1.1/dns-query",  # Cloudflare DoH3
-        "https://dns.google/dns-query",  # Google DoH3
-        "https://dns.alidns.com/dns-query",  # 阿里
-        "https://doh.pub/dns-query"  # 腾讯
-    ],
-    "nameserver-policy": {
-        "geosite:cn,private": [
-            "https://223.5.5.5/dns-query",
-            "https://doh.pub/dns-query"
-        ],
-        "geo:cn": [
-            "https://223.5.5.5/dns-query"
-        ]
+    'enable': True,
+    'enhanced-mode': 'fake-ip',
+    'fake-ip-range': '198.18.0.1/16',
+    'nameserver-policy': {
+        '*.tw': '1.1.1.1',
+        'testflight.apple.com': '8.8.8.8',
+        '*.tmall.com': '223.5.5.5',
+        '*.taobao.com': '223.5.5.5',
+        '*.alicdn.com': '223.5.5.5',
+        '*.aliyun.com': '223.5.5.5',
+        '*.alipay*.com': '223.5.5.5',
+        '*.alibaba*.com': '223.5.5.5',
+        '*.alimama*.com': '223.5.5.5',
+        '*.qq.com': '114.114.114.114',
+        '*.tencent.com': '114.114.114.114',
+        '*.weixin.com': '114.114.114.114',
+        '*.qpic.cn': '114.114.114.114',
+        '*.jd.com': '114.114.114.114',
+        '*.bilibili.com': '114.114.114.114',
+        'hdslb.com': '114.114.114.114',
+        '*.163.com': '119.29.29.29',
+        '*.126.com': '119.29.29.29',
+        '*.126.net': '114.114.114.114',
+        '*.127.net': '114.114.114.114',
+        '*.netease.com': '114.114.114.114',
+        '*.10010.com': '114.114.114.114',
+        '*.unicompayment.com': '114.114.114.114',
+        '*.ximalaya.com': '114.114.114.114',
+        '*.baidu.com': '114.114.114.114',
+        '*.bdstatic.com': '114.114.114.114'
     },
-    "fallback": [
-        "1.1.1.1",
-        "8.8.8.8"
-        # "9.9.9.9"  # Quad9 可选
-    ]
+    'nameserver': [
+        '119.29.29.29',
+        '223.5.5.5',
+        'https://dns.alidns.com/dns-query',
+        'https://doh.pub/dns-query',
+        '114.114.114.114',
+        '156.154.70.1',
+        '1.0.0.1',
+        '8.8.4.4'
+    ],
+    'fallback': [
+        '208.67.222.222:5353',
+        '208.67.220.220:5353',
+        '208.67.222.220:5353',
+        '208.67.220.222:5353',
+        'https://1.1.1.1/dns-query',
+        'https://1.1.1.2/dns-query',
+        'https://1.1.1.3/dns-query',
+        'https://1.0.0.1/dns-query',
+        'https://1.0.0.2/dns-query',
+        'https://1.0.0.3/dns-query',
+        'https://45.11.45.11/dns-query',
+        'https://146.112.41.2/dns-query',
+        'https://162.159.36.1/dns-query',
+        'https://162.159.46.1/dns-query',
+        'https://9.9.9.11:5053/dns-query',
+        'https://101.6.6.6:8443/dns-query',
+        'https://208.67.222.222/dns-query',
+        'https://208.67.220.220/dns-query',
+        'https://185.222.222.222/dns-query',
+        'https://101.101.101.101/dns-query',
+        'https://149.112.112.11:5053/dns-query'
+    ],
+    'fallback-filter': {
+        'geoip': True,
+        'geoip-code': 'CN',
+        'ipcidr': ['240.0.0.0/4']
+    }
 }
 
 class FlowStyleList(list):
