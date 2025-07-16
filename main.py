@@ -87,7 +87,7 @@ def represent_flow_style_list(dumper, data):
 yaml.add_representer(FlowStyleList, represent_flow_style_list)
 
 class ConfigProcessor:
-    def __init__(self, interval=300, lb_strategy='sticky-sessions'):
+    def __init__(self, interval=300, lb_strategy='sticky-sessions', custom_name=None):
         self.rules = []
         self.proxy_groups_name = []
         self.config_group_details = []
@@ -97,8 +97,9 @@ class ConfigProcessor:
         self.fallback_servers = []
         self.interval = interval
         self.lb_strategy = lb_strategy
+        self.custom_name = custom_name
         self.health_check = {
-            'url': 'http://www.qq.com/',
+            'url': 'http://cp.cloudflare.com/generate_204',
             'interval': interval,
             'timeout': 1000
         }
@@ -307,7 +308,10 @@ class ConfigProcessor:
         yaml_str = yaml.dump(config, allow_unicode=True, sort_keys=False)
 
         from datetime import datetime
-        file_name = f"output_Int{str(self.interval)}_{self.lb_strategy}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
+        if self.custom_name:
+            file_name = f"{self.custom_name}_{datetime.now().strftime('%d_%H%M%S')}.yaml"
+        else:
+            file_name = f"output_Int{str(self.interval)}_{self.lb_strategy}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.yaml"
         path = os.path.join(os.getcwd(), 'output', file_name)
         if not os.path.exists('./output'):
             os.makedirs('./output')
@@ -322,9 +326,9 @@ class ConfigProcessor:
         self.create_yaml()
 
 if __name__ == "__main__":
-    processor = ConfigProcessor(interval=300, lb_strategy='sticky-sessions')
+    processor = ConfigProcessor(interval=300, lb_strategy='sticky-sessions', custom_name='device_use')
     processor.run()
-    processor2 = ConfigProcessor(interval=2000, lb_strategy='consistent-hashing')
+    processor1 = ConfigProcessor(interval=60, lb_strategy='sticky-sessions', custom_name='router_use')
+    processor1.run()
+    processor2 = ConfigProcessor(interval=2000, lb_strategy='consistent-hashing', custom_name='older_clash')
     processor2.run()
-    processor3 = ConfigProcessor(interval=180, lb_strategy='consistent-hashing')
-    processor3.run()
