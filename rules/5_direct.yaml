@@ -772,4 +772,3 @@ rules:
   - IP-CIDR,129.226.3.47/32,no-resolve
   - IP-CIDR,162.62.163.63/32,no-resolve
   - IP-CIDR,43.156.222.0/24,no-resolve
-  - IP-ASN,132203,no-resolve
