@@ -326,7 +326,7 @@ class ConfigProcessor:
         self.create_yaml()
 
 if __name__ == "__main__":
-    processor = ConfigProcessor(interval=300, lb_strategy='consistent-hashing', custom_name='device_use')
+    processor = ConfigProcessor(interval=500, lb_strategy='consistent-hashing', custom_name='device_use')
     processor.run()
     processor1 = ConfigProcessor(interval=60, lb_strategy='consistent-hashing', custom_name='router_use')
     processor1.run()

@@ -1,5 +1,5 @@
 group_name: '🎯 全球直连'
-type: 'fallback'
+type: 'select'
 key_word:
   - DIRECT
 fallback_group:
