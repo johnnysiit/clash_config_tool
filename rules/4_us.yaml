@@ -20,6 +20,5 @@ rules:
   - DOMAIN-SUFFIX,discover.com
   - DOMAIN-SUFFIX,usaa.com
   - DOMAIN-SUFFIX,usbank.com
-  - DOMAIN-SUFFIX,americanexpress.com
   - DOMAIN-SUFFIX,ally.com
   - DOMAIN-SUFFIX,discoverfinancial.com
