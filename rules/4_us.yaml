@@ -22,3 +22,5 @@ rules:
   - DOMAIN-SUFFIX,usbank.com
   - DOMAIN-SUFFIX,ally.com
   - DOMAIN-SUFFIX,discoverfinancial.com
+  - DOMAIN-SUFFIX,claude.ai
+  - DOMAIN-SUFFIX,anthropic.com

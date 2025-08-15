@@ -16,6 +16,5 @@ rules:
   - DOMAIN-SUFFIX,bitget.com
   - DOMAIN-SUFFIX,okx.com
   - DOMAIN-SUFFIX,gemini.google.com
-  - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,chatgpt.com
   - DOMAIN-SUFFIX,openai.com
